@@ -60,4 +60,4 @@ class Etudiant(Personne):
     cursus= models.ForeignKey(Cursus, on_delete= models.CASCADE)
     annee= models.IntegerField()
 
-#240
+#244
