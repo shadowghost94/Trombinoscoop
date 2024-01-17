@@ -1,0 +1,69 @@
+header{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100px;
+    width: 100%;
+    background: #3b5998 url('../img/logo.jpg') no-repeat 50px 10px;
+    background-size: 20% 80%;
+    border-bottom: 1px solid #133783;
+}
+
+#formulaire{
+    margin-top: 15%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'lucida Grande', Tahoma, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    color: #000333;
+}
+
+body#loginPage section#content{
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    width: 500px;
+    margin: 0 0 0 -250px;
+    padding: 0;
+}
+
+form label{
+    display: block;
+    width: 150px;
+    float: left;
+    text-align: right;
+    padding: 4px 10px 0 0;
+    font-size: 180%;
+}
+
+form input[type="email"], form input[type="text"], form input[type="password"]{
+    display: block;
+    width: 250px;
+    height: 25px;
+    padding: 2px;
+}
+
+form input[type="submit"]{
+    margin: 0 20px 0 160px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d9dfea #0e1f5b #0e1f5b #d9dfea;
+    background-color: #3b5998;
+    color: #FFFFFF;
+    padding: 2px 15px 3px 15px;
+    text-align: center;
+}
+
+a{
+    color: #3b5998;
+}
+
+form p.error{
+    margin-left: 30%;
+    color: #d23d24
+}

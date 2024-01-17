@@ -1,0 +1,20 @@
+<?xml version="l.O" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+    <head>
+        <title>Trombinoscoop- {% block title %}Bienvenue{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    </head>
+
+    <body id="{%block bodyId%} genericPage {% endblock %}">
+
+        <header>
+            {% block headerContent %}{% endblock %}
+        </header>
+
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+
+    </body>
+</html>
