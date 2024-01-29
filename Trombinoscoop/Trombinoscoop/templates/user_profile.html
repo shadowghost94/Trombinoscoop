@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title%} Création d'un profile{% endblock %}
+{% block bodyId %}userProfilePage{% endblock %}
+
+{% block content %}
+<h1>Création d'un compte</h1>
+    <form action="register" method="get">
+        <p>
+            <label for="profileType">Vous êtes: </label>
+            <select id="profileType">
+                <option value="student" {% if studentForm.is_bound %} selected="seleted" {% endif %}>Etudiant</option>
+                <option value="employee" {% if employeeForm.is_bound %}selected="selected" {% endif %}>Employé</option>
+            </select>
+        </p>
+    </form>
+
+    <form action="register" method="get" id="studentForm">
+        {{ studentForm.as_p }}
+        <p>
+            <input type="hidden" name="profileType" value="student" />
+            <input type="submit" value="Créer un compte">
+        </p>
+    </form>
+
+    <form action="register" method="post" id="employeeForm">
+        {{ employeeForm.as_p}}
+        <p>
+            <input type="hidden" name="profileType" value="employee" />
+            <inpur type="submit" value="Créer un compte">
+        </p>
+    </form>
+{% endblock %}

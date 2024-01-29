@@ -1,28 +1,49 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from Trombinoscoop.forms import *
 from datetime import datetime
 
 def welcome(request):
     return render(request, 'welcome.html', {'current_datetime': datetime.now})
 
 def login(request):
-    #on test si le formulaire à bien été envoyé
-    if len(request.POST)>0:
-        #on test pour s'assurer que tous les pramètres ont bien été transmis
-        if 'email' not in request.POST or 'password' not in request.POST:
-            error="Courriel ou mot de passe non renseigné ..."
-            return render('login.html', {'error': error})
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            return HttpResponseRedirect('/welcome')
         else:
-            email=request.POST['email']
-            password=request.POST['password']
-            
-            #on test pour s'assurer que le mot de passe est le bon
-            if(password != 'sesame' or email != 'pierre@gmail.com'):
-                error="Adresse de courriel ou mot de passe erroné"
-                return render('login.html', {'error': error})
-            
-            #si tout est bon on se rend alors à la page d'accueil
-            else:
-                return HttpResponseRedirect('welcome')
+            return HttpResponseRedirect("/")
+        
     else:
-        return render(request, 'login.html')
+        form = LoginForm()
+        return render(request,'login.html', {'form': form })
+        
+    
+def register(request):
+    if len(request.GET)>0 and 'profileType' in request.GET:
+        studentForm = StudentProfileForm(prefix="st")
+        employeeForm = EmployeeProfileForm(prefix="em")
+        if request.GET['profileType'] == 'student':
+            studentForm = StudentProfileForm(request.GET, prefix="st")
+            if studentForm.is_valid():
+                studentForm.save(commit=True)
+                return HttpResponseRedirect('/login')
+            
+        elif request.GET['profileType'] == 'employee':
+            employeeForm = EmployeeProfileForm(request.GET, prefix="em")
+
+            if employeeForm.is_valid():
+                employeeForm.save(commit=True)
+                return HttpResponseRedirect('/login')
+            
+            #si le formlaire n'est pas validé
+        return render(request, 'user_profile.html', {
+            'studentForm': studentForm,
+            'employeeForm': employeeForm
+        })
+        
+    else:
+        studentForm = StudentProfileForm(prefix="st")
+        employeeForm = EmployeeProfileForm(prefix="em")
+        return render(request, 'user_profile.html', {'studentForm': studentForm, 'employeeForm': employeeForm})

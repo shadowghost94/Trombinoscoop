@@ -4,7 +4,7 @@ class Faculte(models.Model):
     nom= models.CharField(max_length=30)
     couleur= models.CharField(max_length=30)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
 
 class Personne(models.Model):
@@ -15,10 +15,11 @@ class Personne(models.Model):
     courriel= models.EmailField()
     tel_fixe= models.CharField(max_length=20)
     tel_mobile= models.CharField(max_length=20)
+    mot_de_passe= models.CharField(max_length=32)
     amis= models.ManyToManyField("self", blank=True)
     faculte= models.ForeignKey(Faculte, on_delete= models.DO_NOTHING, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nom+" "+self.prenom
 
 class Message(models.Model):
@@ -26,7 +27,7 @@ class Message(models.Model):
     contenu= models.TextField()
     date_de_publication= models.DateField()
 
-    def __unicode__(self):
+    def __str__(self):
         if len (self.contenu) > 20:
             return self.contenu[:19]+"..."
         else:
@@ -36,19 +37,19 @@ class Campus(models.Model):
     nom= models.CharField(max_length=30)
     adresse_postale= models.CharField(max_length=60)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
 
 class Fonction(models.Model):
     intitule= models.CharField(max_length=30)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.intitule
     
 class Cursus(models.Model):
     intitule= models.CharField(max_length=30)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.intitule
     
 class Employe(Personne):

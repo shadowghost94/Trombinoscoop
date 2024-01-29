@@ -8,5 +8,6 @@ urlpatterns = [
     path('', login),
     path('login/', login),
     path('welcome/', welcome),
+    path('register/', register),
     path('admin/', admin.site.urls),
 ]

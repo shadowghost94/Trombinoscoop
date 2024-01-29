@@ -63,7 +63,42 @@ a{
     color: #3b5998;
 }
 
-form p.error{
+ul.errorlist{
     margin-left: 30%;
+    padding: 0;
+    list-style-type: none;
     color: #d23d24
+}
+
+body#loginPage section#content {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    width: 500px;
+    margin: 0 0 0 -250px; 
+    padding: 0;
+}
+
+body section#content
+{
+    position: absolute;
+    top: 110px;
+    left: 50%;
+    width: 500px;
+    margin: 0 0 0 -250px;
+    padding: 0;
+}
+
+body#loginPage section#content
+{
+    top: 150px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 22px;
+    margin: 0px 60px 30px 60px;
+    padding: 0 0 5px 0;
+    color: #3b5998;
+    border-bottom: 1px solid #3b5998;
 }

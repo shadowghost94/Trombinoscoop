@@ -4,25 +4,13 @@
 
 {% block content %}
 <div id="formulaire">
-    <form action="login"method="post">
-
-        {% if error%}
-            <p class="error">{{error}}</p>
-        {% endif %}
+    <form action="/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
         <p>
-            <label for="email" >Courriel: </label>
-            <input name="email" id="email" size="30" type="email">
-        </p>
-
-        <p>
-            <label for="password">Mot de passe: </label>
-            <input name="password" id="password" size="30" type="password" />
-        </p>
-
-        <p>
-            <input type="submit" value="Se connecter"/>
-            <a href="">Créer un compte</a>
+            <input type="submit" value="Se connecter" />
+            <a href="register/">Créer un compte</a>
         </p>
     </form>
 </div>
