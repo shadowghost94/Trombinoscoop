@@ -15,7 +15,7 @@ class Personne(models.Model):
     courriel= models.EmailField()
     tel_fixe= models.CharField(max_length=20)
     tel_mobile= models.CharField(max_length=20)
-    mot_de_passe= models.CharField(max_length=32)
+    mot_de_passe= models.CharField(max_length=32,blank=True)
     amis= models.ManyToManyField("self", blank=True)
     faculte= models.ForeignKey(Faculte, on_delete= models.DO_NOTHING, null=True)
 

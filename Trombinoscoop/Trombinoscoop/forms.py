@@ -20,6 +20,7 @@ class LoginForm(forms.Form):
         return cleaned_data
 
 class StudentProfileForm(forms.ModelForm):
+    mot_de_passe= forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
     class Meta:
         model= Etudiant
         exclude = ('amis',)
