@@ -184,6 +184,9 @@ section#messageList ul li p {
     margin: 8px 0 0 0;
 }
 
+section#messageList ul li {
+    background-color: burlywood;
+}
 /*formatage de la liste d'amis */
 
 body#welcomePage section#friendList {
@@ -209,4 +212,26 @@ section#friendList ul {
 
 section#friendList ul li {
     margin: 0 0 5px 0;
+}
+
+/*style sur l'affichage du profil utilisateur*/
+dl.fieldList dt {
+    display: block;
+    width: 250px;
+    float: left;
+    text-align: right;
+    padding: 0 10px 0 0;
+    font-weight: bold;
+}
+
+dl.fieldList dd {
+    display: block;
+    width: 450px;
+    padding: 0px;
+    margin: 0 0 10px 0;
+
+}
+
+p#showProfileNavigationButtons {
+    margin: 20px 0 0 260px;
 }

@@ -126,3 +126,50 @@ def add_friend(request):
         
     else:
         return HttpResponseRedirect('/')
+    
+def show_profile(request):
+    logged_user= get_logged_user_from_request(request)
+    if logged_user:
+        #Test si le paramètre passé existe et est bien passé
+        if 'userToShow' in request.GET and request.GET['userToShow'] != '':
+            results= Personne.objects.filter(id=request.GET['userToShow'])
+            if len(results) == 1:
+                if Etudiant.objects.filter(id=request.GET['userToShow']):
+                    user_to_show= Etudiant.objects.get(id=request.GET['userToShow'])
+                else:
+                    user_to_show= Employe.objects.get(id=request.GET['userToShow'])
+                
+                return render(request, 'show_profile.html', {'user_to_show': user_to_show})
+            else:
+                return (request, 'show_profile.html', {'user_to_show': logged_user})
+        #le paramètre n'a pas été trouvé
+        else:
+            return render(request, 'show_profile.html', {'user_to_show': logged_user})
+        
+    else:
+        return HttpResponseRedirect("")
+    
+def modify_profile(request):
+    logged_user= get_logged_user_from_request(request)
+    if logged_user:
+        if len(request.GET)>0:
+            if type(logged_user) == Etudiant:
+                form = StudentProfileForm(request.GET, instance=logged_user)
+            else:
+                form= EmployeeProfileForm(request.GET, instance=logged_user)
+
+            if form.is_valid():
+                form.save(commit=True)
+                return HttpResponseRedirect('/welcome')
+            else:
+                return render (request, 'modify_profile.html', {'form': form})
+            
+        else:
+            if type(logged_user) == Etudiant:
+                form= StudentProfileForm(instance=logged_user)
+            else:
+                form= EmployeeProfileForm(instance= logged_user)
+            
+            return render(request, 'modify_profile.html', {'form': form})
+    else:
+        return HttpResponseRedirect('/login')

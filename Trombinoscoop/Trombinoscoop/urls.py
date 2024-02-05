@@ -11,6 +11,8 @@ urlpatterns = [
     path('register/', register),
     path('register/register/', register),
     path('welcome/addFriend', add_friend),
+    path('welcome/showProfile', show_profile),
+    path('welcome/modifyProfile', modify_profile),
     path('admin/', admin.site.urls),
     
 ]
