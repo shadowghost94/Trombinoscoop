@@ -8,6 +8,7 @@ class Faculte(models.Model):
         return self.nom
 
 class Personne(models.Model):
+    type_de_personne = 'generic'
     matricule= models.CharField(max_length=10)
     nom= models.CharField(max_length=30)
     prenom= models.CharField(max_length=30)
@@ -18,7 +19,7 @@ class Personne(models.Model):
     mot_de_passe= models.CharField(max_length=32,blank=True)
     amis= models.ManyToManyField("self", blank=True)
     faculte= models.ForeignKey(Faculte, on_delete= models.DO_NOTHING, null=True)
-
+    
     def __str__(self):
         return self.nom+" "+self.prenom
 
@@ -56,9 +57,11 @@ class Employe(Personne):
     bureau= models.CharField(max_length=30)
     campus= models.ForeignKey(Campus, on_delete=models.DO_NOTHING)
     fonction= models.ForeignKey(Fonction, on_delete=models.DO_NOTHING)
+    type_de_personne = 'employee'
 
 class Etudiant(Personne):
     cursus= models.ForeignKey(Cursus, on_delete= models.CASCADE)
     annee= models.IntegerField()
+    type_de_personne = 'student'
 
 #244

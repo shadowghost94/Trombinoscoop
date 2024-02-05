@@ -30,3 +30,19 @@ class EmployeeProfileForm(forms.ModelForm):
     class Meta:
         model = Employe
         exclude = ('amis',)
+
+class addFriendForm(forms.Form):
+    email= forms.EmailField(label='Courriel')
+
+    def clean(self):
+        cleaned_data= super(addFriendForm, self).clean()
+        email = cleaned_data.get("email")
+
+        #Vérification que le champ est valide
+        if email:
+            result= Personne.objects.filter(courriel= email)
+
+            if len(result) != 1:
+                raise forms.ValidationError("Adresse de courriel erronée.")
+            
+        return cleaned_data

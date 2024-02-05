@@ -2,14 +2,39 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from Trombinoscoop.forms import *
 from Trombinoscoop.models import *
-from datetime import datetime
+from datetime import datetime, date
 
-def welcome(request):
+
+def get_logged_user_from_request(request):
     if 'logged_user_id' in request.session:
         logged_user_id = request.session['logged_user_id']
-        logged_user = Personne.objects.get(id=logged_user_id)
+        
+        #on cherche un étudiant
+        if len(Etudiant.objects.filter( id= logged_user_id ))==1:
+            return Etudiant.objects.get(id=logged_user_id)
+        
+        #On cherche un employe
+        elif len(Employe.objects.filter(id=logged_user_id)) == 1:
+            return Employe.objects.get(id= logged_user_id)
+        
+        #si on a rien trouvé
+        else:
+            return None
+    else:
+        return None
 
-        return render(request, 'welcome.html', {'logged_user': logged_user})
+
+def welcome(request):
+    logged_user= get_logged_user_from_request(request)
+    if not logged_user is None:
+        if 'newMessage' in request.GET and request.GET['newMessage'] != '':
+            newMessage= Message(auteur=logged_user, contenu=request.GET['newMessage'], date_de_publication=date.today())
+            newMessage.save()
+
+        friendMessages = Message.objects.filter(auteur__amis=logged_user).order_by('-date_de_publication')
+
+        return render(request, 'welcome.html', {'logged_user': logged_user, 'friendMessages': friendMessages})
+    
     else:
         return HttpResponseRedirect("")
 
@@ -76,3 +101,28 @@ def register(request):
         studentForm = StudentProfileForm(prefix="st")
         employeeForm = EmployeeProfileForm(prefix="em")
         return render(request, 'user_profile.html', {'studentForm': studentForm, 'employeeForm': employeeForm})
+    
+def add_friend(request):
+    logged_user= get_logged_user_from_request(request)
+    if logged_user:
+        #On test si le formulaire a été envoyé
+        if len(request.GET)>0:
+            form= addFriendForm(request.GET)
+
+            if form.is_valid():
+                new_friend_email = form.cleaned_data['email']
+                newFriend = Personne.objects.get(courriel= new_friend_email)
+                logged_user.amis.add(newFriend)
+                logged_user.save()
+                return HttpResponseRedirect('/welcome') 
+            
+            else:
+                return render(request, 'addFriend.html', {'form': form})
+
+        #si le formulaire n'a pas été envoyé
+        else:
+            form = addFriendForm()
+            return render(request, 'addFriend.html', {'form': form})
+        
+    else:
+        return HttpResponseRedirect('/')

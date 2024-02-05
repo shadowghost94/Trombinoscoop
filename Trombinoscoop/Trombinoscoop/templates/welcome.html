@@ -1,11 +1,62 @@
-<?xml version="l.O" encoding="UTF-8" ?>
-<!DOCTYPE html>
-<html xmlns='http://www.w3.org/1999/xhtml'>
-    <head>
-        <title>Trombinoscoop</title>
-    </head>
+{% extends "base.html"%}
 
-    <body>
-        <p>{{ logged_user.nom }} {{ logged_user.prenom }}, Bienvenue sur Trombinoscoop </P>
-    </body>
-</html>
+{%block bodyId%}welcomePage{% endblock %}
+
+{% block headerContent %}
+    <p id="name"> {{ logged_user.prenom }} {{ logged_user.nom }}</p>
+    <p id="function">
+        {% if logged_user.type_de_personne == 'student' %}
+        Etudiant en
+            {% if logged_user.annee == 1 %}
+                {{ logged_user.annee }}ère
+            {% else %}
+                {{ logged_user.annee }}ème
+            {% endif %}
+
+            {{ logged_user.cursus.intitule }}
+        {% else %}
+            {{ logged_user.fonction.intitule | capfirst }}
+            dans la faculté {{ logged_user.faculte }}
+        {% endif %}
+    </p>
+
+    <p id="profileLinks">
+        <a href="???" class="buttonLink">Voir le profil</a>
+        <a href="???" class="buttonLink">Modifier le profil</a>
+    </p>
+{% endblock %}
+
+{% block content %}
+    <section id="messageList">
+        <form action="" method="get" class="inlineForm">
+            <label for="newMessageInput">Publier un message: </label>
+            <input type="text" name="newMessage" id="newMessageInput" />
+            <input type="submit" value="Publier">
+        </form>
+
+        <ul>
+            {% for message in friendMessages %}
+            <li>
+                <p>
+                    <a href="???">{{ message.auteur.prenom }}
+                    {{ messsage.auteur.nom }}</a> dit:
+                </p>
+
+                <p>{{ message.contenu }}</p>
+            </li>
+
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="friendList">
+        <p class="title">Mes amis</p>
+        <p><a href="addFriend" class="buttonLink">Ajouter</a></p>
+
+        <ul>
+            {% for ami in logged_user.amis.all %}
+                <li><a href="???">{{ ami.prenom }} {{ ami.nom }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

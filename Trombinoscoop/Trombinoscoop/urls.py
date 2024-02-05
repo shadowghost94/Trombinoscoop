@@ -10,5 +10,7 @@ urlpatterns = [
     path('welcome/', welcome),
     path('register/', register),
     path('register/register/', register),
+    path('welcome/addFriend', add_friend),
     path('admin/', admin.site.urls),
+    
 ]
