@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django import forms
+from django.core import exceptions
+from django.http import HttpResponseRedirect, HttpResponse
 from Trombinoscoop.forms import *
 from Trombinoscoop.models import *
 from datetime import datetime, date
@@ -173,3 +175,17 @@ def modify_profile(request):
             return render(request, 'modify_profile.html', {'form': form})
     else:
         return HttpResponseRedirect('/login')
+    
+def ajax_check_email_field(request):
+    HTML_to_return= ''
+    if 'value' in request.GET:
+        field = forms.EmailField()
+        try:
+            field.clean(request.GET['value'])
+        except exceptions.ValidationError as ve:
+            HTML_to_return= "<ul class='errorlist'>"
+            for message in ve.messages:
+                HTML_to_return += '<li>'+message+'</li>'
+                HTML_to_return += '</ul>'
+
+    return HttpResponse(HTML_to_return)

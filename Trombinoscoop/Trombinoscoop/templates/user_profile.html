@@ -20,6 +20,19 @@
     $('#profileType').change(displayRightForm);
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("input#id_courriel").focusout(checkEmailField);
+    })
+    
+
+    function checkEmailField()
+    {
+        alert('Courriel introduit. On va maintenant procéder à la validation');
+    }
+
+</script>
+
 <h1>Création d'un compte</h1>
     <form action="register" method="get">
         <p>

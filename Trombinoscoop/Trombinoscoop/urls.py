@@ -11,8 +11,9 @@ urlpatterns = [
     path('register/', register),
     path('register/register/', register),
     path('welcome/addFriend', add_friend),
-    path('welcome/showProfile', show_profile),
-    path('welcome/modifyProfile', modify_profile),
+    path('showProfile', show_profile),
+    path('modifyProfile', modify_profile),
+    path('ajax/checkEmailFields', ajax_check_email_field),
     path('admin/', admin.site.urls),
     
 ]
