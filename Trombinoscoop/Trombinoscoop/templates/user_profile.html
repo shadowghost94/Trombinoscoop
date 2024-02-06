@@ -6,6 +6,28 @@
 {% block content %}
 
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $("input#id_courriel").focusout(checkEmailField);
+    })
+    
+
+    function checkEmailField()
+    {
+        $fieldValue = $("input#id_courriel").val();
+        $.ajax({
+            url: '/ajax/checkEmailField',
+            data: ({value: $fieldValue}),
+            type: 'GET', 5
+            succes: function($data, $textStatus, $XMLHttpRequest){
+                if($data != '')
+                {
+                    alert($data);
+                }
+            }
+        })
+    }
+
     function displayRightForm(){
         if($('#profileType').val() == 'student'){
             $('#employeeForm').hide();
@@ -18,18 +40,6 @@
 
     $(document).ready(displayRightForm);
     $('#profileType').change(displayRightForm);
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("input#id_courriel").focusout(checkEmailField);
-    })
-    
-
-    function checkEmailField()
-    {
-        alert('Courriel introduit. On va maintenant procéder à la validation');
-    }
 
 </script>
 
