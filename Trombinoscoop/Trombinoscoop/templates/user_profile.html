@@ -22,7 +22,8 @@
             succes: function($data, $textStatus, $XMLHttpRequest){
                 if($data != '')
                 {
-                    alert($data);
+                    $("input#id_courriel").parent().prev('.errorlist').remove();
+                    $("input#id_courriel").parent().before($data)
                 }
             }
         })

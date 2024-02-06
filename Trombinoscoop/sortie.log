@@ -20,3 +20,50 @@ Django version 5.0, using settings 'Trombinoscoop.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 2 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): Trombinoscoop.
+Run 'python manage.py migrate' to apply them.
+February 06, 2024 - 11:51:03
+Django version 5.0, using settings 'Trombinoscoop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 2 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): Trombinoscoop.
+Run 'python manage.py migrate' to apply them.
+February 06, 2024 - 14:47:15
+Django version 5.0, using settings 'Trombinoscoop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+Performing system checks...
+
+Performing system checks...
+
+Performing system checks...
+
+Performing system checks...
+
+Performing system checks...
+
+Performing system checks...
+
+Performing system checks...
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 2 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): Trombinoscoop.
+Run 'python manage.py migrate' to apply them.
+February 06, 2024 - 14:56:29
+Django version 5.0, using settings 'Trombinoscoop.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+

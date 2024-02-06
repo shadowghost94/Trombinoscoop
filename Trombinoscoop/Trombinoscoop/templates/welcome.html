@@ -38,7 +38,7 @@
             {% for message in friendMessages %}
             <li>
                 <p>
-                    <a href="showProfile?userToShow={{ logged_user.id }}">{{ message.auteur.prenom }}
+                    <a href="/showProfile?userToShow={{ message.auteur.id }}">{{ message.auteur.prenom }}
                     {{ messsage.auteur.nom }}</a> dit:
                 </p>
 
@@ -51,11 +51,16 @@
 
     <section id="friendList">
         <p class="title">Mes amis</p>
+        <form action="/welcome" method="get" class="inlineForm">
+            <input type="email" name="newFriend" id="newFriendInput" placeholder="Courriel" />
+            <input type="submit" value="Ajouter" />
+        </form>
+        
         <p><a href="addFriend" class="buttonLink">Ajouter</a></p>
 
         <ul>
             {% for ami in logged_user.amis.all %}
-                <li><a href="showProfile?userToShow={{logged_user.id}}">{{ ami.prenom }} {{ ami.nom }}</a></li>
+                <li><a href="/showProfile?userToShow={{ami.id}}">{{ ami.prenom }} {{ ami.nom }}</a></li>
             {% endfor %}
         </ul>
     </section>

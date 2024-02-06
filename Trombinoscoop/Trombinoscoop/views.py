@@ -189,3 +189,21 @@ def ajax_check_email_field(request):
                 HTML_to_return += '</ul>'
 
     return HttpResponse(HTML_to_return)
+
+def ajax_add_friend (request):
+    HTML_to_return = ''
+    logged_user = get_logged_user_from_request(request)
+    if not logged_user is None:
+        if 'email' in request.GET:
+            new_friend_email = request.GET['email']
+            if len(Personne.objects.filter(courriel= new_friend_email)) == 1:
+                new_friend = Personne.objects.get(courriel=new_friend_email)
+                logged_user.amis.add(new_friend)
+                logged_user.save()
+
+                HTML_to_return = "<li><a href='/showProfile?userToShow=" 
+                HTML_to_return += str(new_friend.id)
+                HTML_to_return += " '> "
+                HTML_to_return += new_friend.prenom+ ' ' +new_friend.nom
+                HTML_to_return += "</a></li> "
+    return HttpResponse(HTML_to_return)
